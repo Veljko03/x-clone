@@ -6,8 +6,8 @@ export const ENV = {
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
 
-  EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY:
-    process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,
+  CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 
   MONGO_URL: process.env.MONGO_URL,
 
