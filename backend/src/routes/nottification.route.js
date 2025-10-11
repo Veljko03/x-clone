@@ -3,7 +3,7 @@ import { protectRoute } from "../middleware/auth.middleware.js";
 import {
   getNotifications,
   deleteNotification,
-} from "../controllers/nottification.controller.js;
+} from "../controllers/nottification.controller.js";
 
 const router = express.Router();
 
