@@ -1,7 +1,6 @@
 import express from "express";
 import { ENV } from "./config/env.js";
 import { connectDb } from "./config/db.js";
-import { clerkMiddleware } from "@clerk/express";
 import userRoutes from "./routes/user.route.js";
 import postRoutes from "./routes/post.route.js";
 import nottificationRoutes from "./routes/nottification.route.js";
@@ -14,7 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(clerkMiddleware());
 app.use(arcjetMiddleware);
 
 app.get("/", (req, res) => res.send("Hello from server"));
