@@ -1,5 +1,5 @@
 import { v2 as claudinary } from "cloudinary";
-import { ENV } from "./env";
+import { ENV } from "./env.js";
 
 claudinary.config({
   cloud_name: ENV.CLAUDINARY_NAME,
