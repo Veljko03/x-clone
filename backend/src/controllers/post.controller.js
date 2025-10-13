@@ -5,6 +5,7 @@ import cloudinary from "../config/cloudinary.js";
 
 import Notification from "../models/nottification.modal.js";
 import Comment from "../models/comment.modal.js";
+import { getAuth } from "@clerk/express";
 
 export const getPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find()
@@ -60,6 +61,7 @@ export const getUserPosts = asyncHandler(async (req, res) => {
 });
 
 export const createPost = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
   const { content } = req.body;
   const imageFile = req.file;
 
@@ -108,6 +110,7 @@ export const createPost = asyncHandler(async (req, res) => {
 });
 
 export const likePost = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
   const { postId } = req.params;
 
   const user = await User.findOne({ clerkId: userId });
@@ -146,6 +149,7 @@ export const likePost = asyncHandler(async (req, res) => {
 });
 
 export const deletePost = asyncHandler(async (req, res) => {
+  const { userId } = getAuth(req);
   const { postId } = req.params;
 
   const user = await User.findOne({ clerkId: userId });
