@@ -1,3 +1,4 @@
+import { useSocialAuth } from "@/hooks/useSocialAuth";
 import {
   Text,
   View,
@@ -6,17 +7,16 @@ import {
   ActivityIndicator,
 } from "react-native";
 
-const isLoading = false;
 export default function Index() {
+  const { handleSocialAuth, isLoading } = useSocialAuth();
   return (
     <View className="flex-1 bg-white">
       <View className="flex-1 px-8 justify-between">
         <View className="flex-1 justify-center">
           <View className="flex-col gap-2">
-            {/* GOOGLE SIGNIN BTN */}
             <TouchableOpacity
               className="flex-row items-center justify-center bg-white border border-gray-300 rounded-full py-3 px-6"
-              // onPress={() => handleSocialAuth("oauth_google")}
+              onPress={() => handleSocialAuth("oauth_google")}
               disabled={isLoading}
               style={{
                 shadowColor: "#000",
