@@ -1,4 +1,4 @@
-//import { CONVERSATIONS, ConversationType } from "@/data/conversations";
+import { CONVERSATIONS, ConversationType } from "@/data/conversations";
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import {
@@ -17,61 +17,61 @@ import {
 } from "react-native-safe-area-context";
 
 const MessagesScreen = () => {
-  //   const insets = useSafeAreaInsets();
-  //   const [searchText, setSearchText] = useState("");
-  //   const [conversationsList, setConversationsList] = useState(CONVERSATIONS);
-  //   const [selectedConversation, setSelectedConversation] =
-  //     useState<ConversationType | null>(null);
-  //   const [isChatOpen, setIsChatOpen] = useState(false);
-  //   const [newMessage, setNewMessage] = useState("");
+  const insets = useSafeAreaInsets();
+  const [searchText, setSearchText] = useState("");
+  const [conversationsList, setConversationsList] = useState(CONVERSATIONS);
+  const [selectedConversation, setSelectedConversation] =
+    useState<ConversationType | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
 
-  //   const deleteConversation = (conversationId: number) => {
-  //     Alert.alert(
-  //       "Delete Conversation",
-  //       "Are you sure you want to delete this conversation?",
-  //       [
-  //         { text: "Cancel", style: "cancel" },
-  //         {
-  //           text: "Delete",
-  //           style: "destructive",
-  //           onPress: () => {
-  //             setConversationsList((prev) =>
-  //               prev.filter((conv) => conv.id !== conversationId)
-  //             );
-  //           },
-  //         },
-  //       ]
-  //     );
-  //   };
+  const deleteConversation = (conversationId: number) => {
+    Alert.alert(
+      "Delete Conversation",
+      "Are you sure you want to delete this conversation?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            setConversationsList((prev) =>
+              prev.filter((conv) => conv.id !== conversationId)
+            );
+          },
+        },
+      ]
+    );
+  };
 
-  //   const openConversation = (conversation: ConversationType) => {
-  //     setSelectedConversation(conversation);
-  //     setIsChatOpen(true);
-  //   };
+  const openConversation = (conversation: ConversationType) => {
+    setSelectedConversation(conversation);
+    setIsChatOpen(true);
+  };
 
-  //   const closeChatModal = () => {
-  //     setIsChatOpen(false);
-  //     setSelectedConversation(null);
-  //     setNewMessage("");
-  //   };
+  const closeChatModal = () => {
+    setIsChatOpen(false);
+    setSelectedConversation(null);
+    setNewMessage("");
+  };
 
-  //   const sendMessage = () => {
-  //     if (newMessage.trim() && selectedConversation) {
-  //       // update last message in conversation
-  //       setConversationsList((prev) =>
-  //         prev.map((conv) =>
-  //           conv.id === selectedConversation.id
-  //             ? { ...conv, lastMessage: newMessage, time: "now" }
-  //             : conv
-  //         )
-  //       );
-  //       setNewMessage("");
-  //       Alert.alert(
-  //         "Message Sent!",
-  //         `Your message has been sent to ${selectedConversation.user.name}`
-  //       );
-  //     }
-  //   };
+  const sendMessage = () => {
+    if (newMessage.trim() && selectedConversation) {
+      // update last message in conversation
+      setConversationsList((prev) =>
+        prev.map((conv) =>
+          conv.id === selectedConversation.id
+            ? { ...conv, lastMessage: newMessage, time: "now" }
+            : conv
+        )
+      );
+      setNewMessage("");
+      Alert.alert(
+        "Message Sent!",
+        `Your message has been sent to ${selectedConversation.user.name}`
+      );
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
@@ -82,7 +82,7 @@ const MessagesScreen = () => {
           <Feather name="edit" size={24} color="#1DA1F2" />
         </TouchableOpacity>
       </View>
-      {/* 
+
       <View className="px-4 py-3 border-b border-gray-100">
         <View className="flex-row items-center bg-gray-100 rounded-full px-4 py-3">
           <Feather name="search" size={20} color="#657786" />
@@ -245,7 +245,7 @@ const MessagesScreen = () => {
             </View>
           </SafeAreaView>
         )}
-      </Modal> */}
+      </Modal>
     </SafeAreaView>
   );
 };
