@@ -1,9 +1,9 @@
 import express from "express";
-
 import {
   createPost,
   deletePost,
   getPost,
+  getPosts,
   getUserPosts,
   likePost,
 } from "../controllers/post.controller.js";
@@ -13,7 +13,7 @@ import upload from "../middleware/upload.middleware.js";
 const router = express.Router();
 
 // public routes
-router.get("/", getPost);
+router.get("/", getPosts);
 router.get("/:postId", getPost);
 router.get("/user/:username", getUserPosts);
 

@@ -1,9 +1,9 @@
 import asyncHandler from "express-async-handler";
 import { getAuth } from "@clerk/express";
-import Comment from "../models/comment.modal.js";
-import Post from "../models/post.modal.js";
+import Comment from "../models/comment.model.js";
+import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
-import Notification from "../models/nottification.modal.js";
+import Notification from "../models/notification.model.js";
 
 export const getComments = asyncHandler(async (req, res) => {
   const { postId } = req.params;
@@ -27,8 +27,7 @@ export const createComment = asyncHandler(async (req, res) => {
   const user = await User.findOne({ clerkId: userId });
   const post = await Post.findById(postId);
 
-  if (!user || !post)
-    return res.status(404).json({ error: "User or post not found" });
+  if (!user || !post) return res.status(404).json({ error: "User or post not found" });
 
   const comment = await Comment.create({
     user: user._id,
@@ -36,10 +35,12 @@ export const createComment = asyncHandler(async (req, res) => {
     content,
   });
 
+  // link the comment to the post
   await Post.findByIdAndUpdate(postId, {
     $push: { comments: comment._id },
   });
 
+  // create notification if not commenting on own post
   if (post.user.toString() !== user._id.toString()) {
     await Notification.create({
       from: user._id,
@@ -65,15 +66,15 @@ export const deleteComment = asyncHandler(async (req, res) => {
   }
 
   if (comment.user.toString() !== user._id.toString()) {
-    return res
-      .status(403)
-      .json({ error: "You can only delete your own comments" });
+    return res.status(403).json({ error: "You can only delete your own comments" });
   }
 
+  // remove comment from post
   await Post.findByIdAndUpdate(comment.post, {
     $pull: { comments: commentId },
   });
 
+  // delete the comment
   await Comment.findByIdAndDelete(commentId);
 
   res.status(200).json({ message: "Comment deleted successfully" });

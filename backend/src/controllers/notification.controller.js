@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import { getAuth } from "@clerk/express";
-import Notification from "../models/nottification.modal.js";
+import Notification from "../models/notification.model.js";
 import User from "../models/user.model.js";
 
 export const getNotifications = asyncHandler(async (req, res) => {
@@ -30,8 +30,7 @@ export const deleteNotification = asyncHandler(async (req, res) => {
     to: user._id,
   });
 
-  if (!notification)
-    return res.status(404).json({ error: "Notification not found" });
+  if (!notification) return res.status(404).json({ error: "Notification not found" });
 
   res.status(200).json({ message: "Notification deleted successfully" });
 });
