@@ -13,7 +13,13 @@ import { connectDB } from "./config/db.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+  })
+);
 app.use(express.json());
 
 app.use(clerkMiddleware());
